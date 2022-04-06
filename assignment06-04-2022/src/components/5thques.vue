@@ -2,7 +2,7 @@
   <div id="class">
     Firstname:<input type="text" v-model="firstname" /><br />
     Lastname:<input type="text" v-model="lastname" /><br />
-    <button @click="fun()">clickhere</button>
+    <button @click="fun1()">clicktogetname</button>
     <h1>{{ firstname }}{{ lastname }}</h1>
   </div>
 </template>
@@ -15,16 +15,15 @@ export default {
     return {
       firstname: "",
       lastname: " ",
-      fullname:" "
+      fullname:" ",
     };
   },
   methods:{
-    fun(){
-      this.firstname="Mantra",
-      this.secondname="Technologies",
-    
-      this.fullname=this.firstname+this.secondname
-      return this.fullname
+    fun1(){
+    this.firstname="Mantra",
+    this.lastname ="Technologies",
+    this.fullname=this.firstname+this.lastname
+    return this.fullname
     }
 
   },

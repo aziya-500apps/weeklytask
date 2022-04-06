@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
-    <form name="myform" method="post" onsubmit="fun()">
-        <input type="text" name="word" placeholder="Enter Text" />
+    <form name="form1" method="post" onsubmit="fun()">
+        <input type="text" name="inputname" placeholder="Enter Text" />
         <button onclick="fun()">Search</button>
     </form>
 </head>
@@ -10,14 +10,14 @@
     <script>
         function fun() {
             const array = ["agile", "crm", "mantra", "technologies", "500apps", "infinity"];
-            const substring = document.myform.word.value;
-            const match = array.find(element => {
-                if (element.includes(substring)) {
+            const substring = document.form1.inputname.value;
+            const matcheddata = array.find(arrayelement => {
+                if (arrayelement.includes(substring)) {
                     return true;
                 }
             });
-            document.write(match);
-            if (match !== undefined) {
+            document.write(matcheddata);
+            if (matcheddata !== undefined) {
             }
         }
     </script>
