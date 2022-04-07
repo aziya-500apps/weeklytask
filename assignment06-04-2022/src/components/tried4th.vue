@@ -32,7 +32,7 @@ export default {
 
 <!--const getData = () => {     // return promise object when function is executed     
 return new Promise((resolve, reject) => {         // Using axios to fetch API URL         
-axios             .get("https://api.publicapis.rg/entries")             .then((response) => {                
+axios             .get("https://api.publicapis.org/entries")             .then((response) => {                
      // resolve when response is received                 resolve(response.data);             })             
      .catch((error) => {                 // reject when error is occured                 reject(error);            
       });     }); } // Hit API and fetch data through function var response = getData() response.then((data) => {     
