@@ -1,0 +1,62 @@
+06/april/2022
+
+Trainee Test Paper 3
+Duration: 2 hours.
+Instructions
+1. You have to complete the test in 2 hours.
+2. Send your answers document by email to suresh.yechu@500apps.com
+3. Answer to all questions is mandatory.
+4. Your responses will be reviewed and the score shared with you within 2 days of the test.
+5. We shall have these types of tests regularly.
+6. Ensure to think before you answer.
+7. Do not copy from the internet.
+8. USE ONLY VUE JS AND JAVASCRIPT. DO NOT WRITE THE PROGRAMS IN JAVA
+Note that we shall have all your scores recorded in a tracker and evaluate your performance
+regularly and graded. Those whose scores are in D Category, will be asked to leave.
+1.
+2.
+3.
+4.
+***
+"Take an input field(text) and implement search functionality from the below array.
+var array_names = [""agile"",""crm"",""mantra"",""technologies"",""500apps"",""infinity""];
+Eg: gi
+result : [""agile"",""technologies""];"
+Explain types of slots with examples and syntax
+Display current time for every 5 sec using Settimeout and SetInterval (JAVASCRIPT)
+"Fetch the data from the below URL and display the data in Ui(name and email)
+http://www.json-generator.com/api/json/get/bSldINskRK
+Eg : output format -- name - email"
+5.
+"Write a SELF INVOKABLE FUNCTION passing first name and last name as
+Arguments/Params to print the FULL NAME
+Eg: first name = ""Mantra""
+last name = ""technologies""
+Output : ""Mantra technologies"""
+6.
+7.
+Get the name from child component using refs and print it in console in the parent
+component.
+"Explain the difference between arrow function and normal function.
+Give an example to achieve the below output
+Eg : Output : Print this in console :
+""It is an even number"" (Pass 2 as a param to the function)
+""It is an odd number"" (Pass 5 as a param to the function)"Trainee Test Paper 3
+8. "Using Vue Bootstrap table(b-table) print the below data.
+[
+{""email"": ""Eliseo@gardner.biz"",""id"": 1,""name"": ""id labore ex et quam laborum""},
+{""email"": ""Jayne_Kuhic@sydney.com"",""id"": 2,""name"": ""quo vero reiciendis velit
+similique
+earum""},
+{""email"": ""Nikita@garfield.biz"",""id"": 3,""name"": ""odio adipisci rerum aut animi""},
+{""email"": ""Lew@alysha.tv"",""id"": 4,""name"": ""alias odio sit""}
+]"
+9. "Using Vue Bootstrap forms(b-form), Take the fields as NAME, EMAIL, Age and Contact
+number.
+Display the filled form object in UI on click of SAVE BUTTON"
+10. "HANDLE the errors we get in below function . DO NOT MODIFY THE EXISTING
+FUNCTION.
+function handle() {
+count = count * 5;
+console.log(""printing count"",count);
+}"

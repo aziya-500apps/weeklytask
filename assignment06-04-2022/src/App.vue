@@ -2,7 +2,7 @@
   <div id="app">
     <router-view/>
     <!--<six ref="msg" msg="Mantra Technologies">{{msg}}<six/>-->
-    <six ref="name" name="Mantra Technologies">{{name}}</six>
+    <six ref="name" name="Mantra Technologies"></six>
       <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
 
   </div>
@@ -18,7 +18,7 @@ export default {
 
   },
   mounted:function(){
-    this.$refs.six.msg,
+    
     this.$refs.six.name
   }
    
