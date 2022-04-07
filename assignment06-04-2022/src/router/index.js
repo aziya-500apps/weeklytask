@@ -9,6 +9,7 @@ import NineTh from "../components/9thques.vue"
 import FirstTried from "../components/firstquestried.vue"
 import FourTh from "../components/4thques.vue"
 import TrieD from "../components/tried4th.vue"
+import QueS from "../components/question.vue"
 
 
 Vue.use(Router)
@@ -23,6 +24,7 @@ const routes=[
     {path:"/firsttried",name:"FirstTried ",component:FirstTried},
     {path:"/four",name:"FourTh",component:FourTh},
     {path:"/Tried4",name:"TrieDh",component:TrieD},
+    {path:"/queS",name:"QueS",component:QueS},
 
 ]
 let router =new Router({routes})
