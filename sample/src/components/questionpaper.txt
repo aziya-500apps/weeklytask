@@ -1,7 +1,7 @@
 
 01/april/2022
 
-Trainee Test Paper 2
+Trainee Test Paper 4
 Duration: 2 hours.
 Instructions
 1. You have to complete the test in 2 hours.
@@ -15,48 +15,69 @@ Instructions
 Note that we shall have all your scores recorded in a tracker and evaluate your performance
 regularly and graded. Those whose scores are in D Category, will be asked to leave.
 ***
-1.
-2.
-3.
-4.
-5.
-6.
-Display the data in a table using v-for with the data given below :
-Display the name and index in the table , do not display description
-table_data = [{ "name" :" Agile CRM" , "description" :" A company of excellence"},
-{"name":"mantra technologies", "description":"500apps" },{"name":"500apps Python",
-"description":"Backend built using python" },{"name":"500apps infinity", "description":"Built
-using vue JS" }]
-Eg: AgileCRM - 0
-Display the data as shown below using v-for with the data given below :
-table_data = { "name" :" Agile CRM" , "description" :" A company of excellence", "Years of
-experience":"12", "Location":"Hyderabad"}
-Eg:
-name: Agile CRM
-description : A company of excellence
-years of experience: 12
-location : Hyderabad
-Give an example for component registration in local and global?
-Take a name and pass it from parent to child component using props. Give an example
-with syntax in parent and child component
-Write an example to pass an event from child to parent component using emit event.
-Give an example with syntax in parent and child component.
-Display the below data in cards using b-card(vue bootstrap card). Loop the data using v-
-for and print it in cards
-data = [{ "name" :" Agile CRM" , "description" :" A company of excellence"},
-{"name":"mantra technologies", "description":"500apps" },{"name":"500apps Python",
-"description":"Backend built using python" },{"name":"500apps infinity", "description":"Built
-using vue JS" }]Trainee Test Paper 2
-7.
-Find the index of id: 88 using inbuilt javascript method
-var users = [ { id: 20, name: 'Captain Piett' }, { id: 24, name: 'General Veers' }, { id: 56, name:
-'Admiral Ozzel' }, { id: 88, name: 'Commander Jerjerrod' } ];
-8. Filter the below data and display the data with the name "General veers"
-var officers = [ { id: 20, name: 'Captain Piett' }, { id: 24, name: 'General Veers' }, { id: 56,
-name: 'Admiral Ozzel' }, { id: 88, name: 'Commander Jerjerrod' } ];
-Eg output: { id: 24, name: 'General Veers' }
-9. What is the use of Spread operator? Give an example
-10. Using Es6 map function Display the array of id's for all Users.
-var users = [ { id: 20, name: 'Captain Piett' }, { id: 24, name: 'General Veers' }, { id: 56, name:
-'Admiral Ozzel' }, { id: 88, name: 'Commander Jerjerrod' } ];
-Eg output: [20, 24, 56, 88]
+1. "var array = [1,2,3,7,8,6,9,10];
+Insert numbers 4 and 5 as values at the index of 5 USING INBUILT ARRAY METHODS
+Output should be [1,2,3,7,8,4,5,6,9,10];"
+2. "Take a textarea field in a form, on entering every letter should print the count of that
+value
+Eg: ""my name is mantra""
+Output : 17"
+3. Print the "details" in below data
+[
+{
+"category1": [{
+"name": "cat1",
+"description": "it is cat1",
+"details": ["name", "category", "age", "contact"]
+}]
+},
+{
+"category2": [{
+"name": "cat2",
+"description": "it is cat2",
+"details": ["name2", "category2", "age2", "contact2"]
+}]
+}
+]
+Eg Output:
+name, category, age, contact
+name2, category2, age2, contact2Trainee Test Paper 4
+4. Fetch the data from below URL USING PROMISES and print it in B-CARD
+https://jsonplaceholder.typicode.com/posts/1/comments
+5. HANDLE the errors we get in below function . DO NOT MODIFY THE EXISTING FUNCTION.
+function errorshandling() {
+test = val * 45;
+console.log("test",val);
+}
+6. Get the name from parent component using $parent and print it in the chid component.
+7. Take a dropdown consisting of statuses "open, closed and pending".
+On click of a status in the dropdown, display the corresponding data with that Status in a
+TABLE/LIST VIEW
+[
+{"email": "Eliseo@gardner.biz","id": 1,"name": "id labore ex et quam
+laborum","status":"open"},
+{"email": "Jayne_Kuhic@sydney.com","id": 2,"name": "quovero reiciendis velit similique
+earum","status":"pending"},
+{"email": "Nikita@garfield.biz","id": 3,"name":"odioadipisci rerum aut
+animi","status":"closed"},
+{"email": "Lew@alysha.tv","id": 4,"name": "alias odio sit","status":"pending"}
+]
+EG:
+If we select "open" from dropdown,
+Output :
+email
+id
+name
+status
+Eliseo@gardner.biz
+1
+id labore ex et quam laborum open
+8. "Display a text in UI with p tag.
+If user clicks on it. It should display a text field in instead of p tag .Edit the text and click
+enter it should be updated."
+9. Explain local storage and session storage, why do we use them . Explain with significance
+10. "tTke 2 input fields with First name and last name,
+If user enters the data, on click of a button
+display the full name using COMPUTED Property.
+Eg: first_name = ""500apps"" , last_name = ""infinity""
+Output : full_name : ""500apps_infinity"""

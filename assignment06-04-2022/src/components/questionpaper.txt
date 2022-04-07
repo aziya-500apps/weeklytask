@@ -18,13 +18,13 @@ regularly and graded. Those whose scores are in D Category, will be asked to lea
 3.
 4.
 ***
-"Take an input field(text) and implement search functionality from the below array.
+1."Take an input field(text) and implement search functionality from the below array.
 var array_names = [""agile"",""crm"",""mantra"",""technologies"",""500apps"",""infinity""];
 Eg: gi
 result : [""agile"",""technologies""];"
-Explain types of slots with examples and syntax
-Display current time for every 5 sec using Settimeout and SetInterval (JAVASCRIPT)
-"Fetch the data from the below URL and display the data in Ui(name and email)
+2.Explain types of slots with examples and syntax
+3.Display current time for every 5 sec using Settimeout and SetInterval (JAVASCRIPT)
+4."Fetch the data from the below URL and display the data in Ui(name and email)
 http://www.json-generator.com/api/json/get/bSldINskRK
 Eg : output format -- name - email"
 5.
@@ -33,11 +33,9 @@ Arguments/Params to print the FULL NAME
 Eg: first name = ""Mantra""
 last name = ""technologies""
 Output : ""Mantra technologies"""
-6.
-7.
-Get the name from child component using refs and print it in console in the parent
+6.Get the name from child component using refs and print it in console in the parent
 component.
-"Explain the difference between arrow function and normal function.
+7."Explain the difference between arrow function and normal function.
 Give an example to achieve the below output
 Eg : Output : Print this in console :
 ""It is an even number"" (Pass 2 as a param to the function)
@@ -59,4 +57,3 @@ FUNCTION.
 function handle() {
 count = count * 5;
 console.log(""printing count"",count);
-}"
