@@ -7,6 +7,8 @@ import EighTh from "../components/8thques.vue"
 import FifTh from "../components/5thques.vue"
 import NineTh from "../components/9thques.vue"
 import FirstTried from "../components/firstquestried.vue"
+import FourTh from "../components/4thques.vue"
+import TrieD from "../components/tried4th.vue"
 
 
 Vue.use(Router)
@@ -18,7 +20,9 @@ const routes=[
     {path:"/five",name:"FifTh",component:FifTh},
     {path:"/three",name:"ThirD",component:ThirD},
     {path:"/nine",name:"NineTh",component:NineTh},
-    {path:"/firsttried",name:"FirstTried ",component:FirstTried },
+    {path:"/firsttried",name:"FirstTried ",component:FirstTried},
+    {path:"/four",name:"FourTh",component:FourTh},
+    {path:"/Tried4",name:"TrieDh",component:TrieD},
 
 ]
 let router =new Router({routes})
