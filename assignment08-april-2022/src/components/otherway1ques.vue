@@ -1,6 +1,5 @@
 <template>
     <div>
-    <p>First</p>
     <button @click="funtime1()">Alphabatical</button>
     <button @click="funtime2()">reverse</button>
     </div>

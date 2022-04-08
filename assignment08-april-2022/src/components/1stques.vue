@@ -24,15 +24,10 @@ export default {
       so: "Aziya",
     };
   },
-
   methods: {
     func() {
-      this.reverse1 = this.users.reverse();
-
-      //this.so=this.users.sort();
+      this.reverse1 = this.users.reverse(); 
     },
-
-    //document.getElementById('id').innerHTML=this.rev
   },
 };
 </script>

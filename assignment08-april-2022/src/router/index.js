@@ -5,7 +5,7 @@ import FourTh from "../components/4thques"
 import ThrEe from "../components/3rdques"
 import FirsT from "../components/1stques"
 import ThreeTry from "../components/3rdquestry"
-import ThreeTry1 from "../components/33ques"
+import ThreeTry1 from "../components/3ques"
 import Five from "../components/5thques"
 
 
