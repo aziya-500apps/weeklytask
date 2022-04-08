@@ -23,7 +23,7 @@ const routes=[
     {path:"/nine",name:"NineTh",component:NineTh},
     {path:"/firsttried",name:"FirstTried ",component:FirstTried},
     {path:"/four",name:"FourTh",component:FourTh},
-    {path:"/Tried4",name:"TrieDh",component:TrieD},
+    {path:"/tried4",name:"TrieDh",component:TrieD},
     {path:"/queS",name:"QueS",component:QueS},
 
 ]

@@ -11,7 +11,7 @@
 //var axios = require("axios").default;
 
 export default {
-  name: "queS4",
+  name: "QueS4",
 
   data() {
     return {

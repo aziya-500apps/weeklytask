@@ -6,14 +6,10 @@
         name="search"
         id="search"
         v-on:keyup="search()"
-        placeholder="search .."
-      />
+        placeholder="search .."/>
     </center>
-
     <center>
       <table id="mytable">
-        
-
         <tr>
           <td>{{ array[0] }}</td>
         </tr>
@@ -39,27 +35,17 @@
         </tr>
       </table>
     </center>
-
-    
   </div>
 </template>
-
-
 <script>
 export default {
   name: "queS12",
-
   data() {
     return {
       array: ["agile", "crm", "mantra", "technologies", "500apps", "infinity"],
-
-  
     };
   },
-
   methods: {
- 
-
     search() {
       var searchbar, filter, table, tr, td, i, txt;
 

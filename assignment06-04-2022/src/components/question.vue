@@ -1,16 +1,14 @@
 <template>
   <div>
-    <b-table striped hover :items="posts.entries" 
-    :fields="fields"> </b-table>
+    <b-table striped hover :items="posts.entries" :fields="fields"> </b-table>
 
     {{ posts }}
   </div>
 </template>
 <script>
 //var axios = require("axios").default;
-
 export default {
-  name: "queS4",
+  name: "QueS4",
 
   data() {
     return {
@@ -32,15 +30,10 @@ export default {
     },
   },
 
-  /*mounted() {
-
+/*mounted() {
 axios
-
 .get("http://www.json-generator.com/api/json/get/bSldINskRK")
-
 .then(response=>(this.posts=response))
-
-
 }*/
 
   created() {
