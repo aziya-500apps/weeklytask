@@ -70,13 +70,13 @@ export default {
     };
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
+    onSubmit() {
+     
 
       document.getElementById("id").innerHTML = JSON.stringify(this.form);
     },
-    onReset(event) {
-      event.preventDefault();
+    onReset() {
+    
       // Reset our form values
       this.form.email = "";
       this.form.name = "";
@@ -85,7 +85,7 @@ export default {
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
-        this.show = true;
+      this.show = true;
       });
     },
   },
