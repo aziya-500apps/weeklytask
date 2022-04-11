@@ -16,14 +16,14 @@ export default {
       fields: ["name", "domains", "state-province","web-pages"],
     };
   },
-
   methods: {
     async getData() {
       try {
         let response = await fetch("http://universities.hipolabs.com/search?country");
 
         this.posts = await response.json();
-      } catch (error) {
+      } 
+      catch (error) {
         console.log(error);
       }
     },

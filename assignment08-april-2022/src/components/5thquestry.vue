@@ -13,7 +13,6 @@
           <tr>
             <th>Name</th>
             <th>Number</th>
-            
           </tr>
         </thead>
         <tbody>

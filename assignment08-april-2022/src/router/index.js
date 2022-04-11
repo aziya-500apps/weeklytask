@@ -9,6 +9,7 @@ import ThreeTry1 from "../components/3ques"
 import Five from "../components/5thques"
 import Fivetry from "../components/5thquestry"
 import Six from "../components/6thques"
+import Fiveth from "../components/5thquesdata"
 
 Vue.use(Router)
 const routes=[
@@ -22,6 +23,7 @@ const routes=[
     {path:"/five",name:"Five",component:Five},
     {path:"/fivetry",name:"Fivetry",component:Fivetry},
     {path:"/six",name:"Six",component:Six},
+    {path:"/fivedata",name:"Fiveth",component:Fiveth},
    
     
 ]
