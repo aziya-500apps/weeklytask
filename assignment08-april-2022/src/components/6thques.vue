@@ -1,11 +1,11 @@
 <template>
   <div>
     <b-dropdown id="dropdown-1" text="Country" class="m-md-2">
-      <b-dropdown-item @click="India()">India</b-dropdown-item>
+      <b-dropdown-item @click="funindia()">India</b-dropdown-item>
 
-      <b-dropdown-item @click="srilanka()">srilanka</b-dropdown-item>
+      <b-dropdown-item @click="funsrilanka()">srilanka</b-dropdown-item>
 
-      <b-dropdown-item @click="usa()">us</b-dropdown-item>
+      <b-dropdown-item @click="funusa()">us</b-dropdown-item>
     </b-dropdown>
   </div>
 </template>
@@ -26,19 +26,19 @@ export default {
     };
   },
   methods: {
-    India() {
+    funindia() {
       let country = this.countrydet.map((arrItem) => {
         if (arrItem.name == "India") return arrItem;
       });
       console.log(country);
     },
-    srilanka() {
+    funsrilanka() {
       let country = this.countrydet.map((arrItem) => {
         if (arrItem.name == "srilanka") return arrItem;
       });
       console.log(country);
     },
-    usa() {
+    funusa() {
       let country = this.countrydet.map((arrItem) => {
         if (arrItem.name == "us") return arrItem;
       });

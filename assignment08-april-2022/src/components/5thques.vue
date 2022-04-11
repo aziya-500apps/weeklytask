@@ -13,7 +13,6 @@ export default {
   data() {
     return {
       posts: " ",
-
       fields: ["name", "domains", "state-province","web-pages"],
     };
   },
