@@ -5,11 +5,12 @@ import FourTh from "../components/4thques"
 import ThrEe from "../components/3rdques"
 import FirsT from "../components/1stques"
 import ThreeTry from "../components/3rdquestry"
-import ThreeTry1 from "../components/3ques"
+import ThreeTry1 from "../components/3rdoriginal"
 import Five from "../components/5thques"
 import Fivetry from "../components/5thquestry"
-import Six from "../components/6thques"
-import Fiveth from "../components/5thquesdata"
+import Fiveth from "../components/5thoriginal"
+import Sixo from "../components/6thoriginal"
+import Sixooo from "../components/6th1original"
 
 Vue.use(Router)
 const routes=[
@@ -22,9 +23,11 @@ const routes=[
     {path:"/threetry1",name:"ThreeTry1",component:ThreeTry1},
     {path:"/five",name:"Five",component:Five},
     {path:"/fivetry",name:"Fivetry",component:Fivetry},
-    {path:"/six",name:"Six",component:Six},
     {path:"/fivedata",name:"Fiveth",component:Fiveth},
-   
+    {path:"/sixo",name:"Sixo",component:Sixo},
+    {path:"/sixooo",name:"Sixooo",component:Sixooo},
+    
+  
     
 ]
 let router =new Router({routes})

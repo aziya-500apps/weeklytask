@@ -5,15 +5,21 @@
       
       <button @click="getData()">click button</button>
       <!--<b-table striped hover :items="posts" :fields="fields"> </b-table>-->
+      <b-container class="bv-example-row">
       <b-card>
         <b-card-text v-for="data1 in posts" :key=data1.id>
+           <b-card><b-row>
+                 <b-col>University Name:{{data1.name}}</b-col>
+           </b-row><br>
            <b-row>
-                  <b-col>{{data1.name}}</b-col>
-                  <b-col>{{data1.domains}}</b-col>
-                   <b-col>{{data1.web_pages}}</b-col>
-           </b-row>
+              <b-col>Domain Name:{{data1.domains}}</b-col>
+              <b-col>Website Name:{{data1.web_pages}}</b-col>
+           </b-row></b-card>
         </b-card-text>
       </b-card>
+      </b-container>
+
+     
   </div>
 </template>
 <script>
