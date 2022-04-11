@@ -10,7 +10,8 @@ import Five from "../components/5thques"
 import Fivetry from "../components/5thquestry"
 import Fiveth from "../components/5thoriginal"
 import Sixo from "../components/6thoriginal"
-import Sixooo from "../components/6th1original"
+import Sixdummy from "../components/6thdummy"
+//import Seven from "../components/7thques"
 
 Vue.use(Router)
 const routes=[
@@ -25,10 +26,10 @@ const routes=[
     {path:"/fivetry",name:"Fivetry",component:Fivetry},
     {path:"/fivedata",name:"Fiveth",component:Fiveth},
     {path:"/sixo",name:"Sixo",component:Sixo},
-    {path:"/sixooo",name:"Sixooo",component:Sixooo},
-    
-  
-    
+    {path:"/sixdummy",name:"Sixdummy",component:Sixdummy},
+   // {path:"/seven",name:"Seven",component:Seven},
+
+
 ]
 let router =new Router({routes})
 export default router

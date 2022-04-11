@@ -18,8 +18,7 @@
         </b-card-text>
       </b-card>
       </b-container>
-
-     
+    
   </div>
 </template>
 <script>
