@@ -1,48 +1,73 @@
 <template>
-  <div class="card text-center m-3">
-    <h3 class="card-header">Vue.js Pagination Tutorial & Example</h3>
+  <div class="overflow-auto">
+    <b-form-input v-model="text" placeholder="Enter country" required>
+    </b-form-input>
 
-    <div class="card-body">
-      <div v-for="item in pageOfItems" :key="item.id">{{ item.name }}</div>
-    </div>
+    <button @click="getData()">Submit</button>
 
-    <div class="card-footer pb-0 pt-3">
-      <jw-pagination
-        :items="exampleItems"
-        @changePage="onChangePage"
-      ></jw-pagination>
-    </div>
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="my-table"
+    ></b-pagination>
+
+    <p class="mt-3">Current Page: {{ currentPage }}</p>
+
+    <b-table
+      id="my-table"
+      :items="posts"
+      :per-page="perPage"
+      :current-page="currentPage"
+      small
+      :fields="fields"
+    ></b-table>
   </div>
 </template>
 
 
 <script>
-// an example array of items to be paged
-
-const exampleItems = [...Array(150).keys()].map((i) => ({
-  id: i + 1,
-  name: "Item " + (i + 1),
-}));
-
 export default {
-  name: "queS2aa",
+  name: "queSecond",
 
   data() {
     return {
-      exampleItems,
+      perPage: 5,
 
-      pageOfItems: [],
+      currentPage: 1,
+
+      posts: "",
+
+      fields: ["name", "domains", "state-province", "web_pages", "country"],
     };
   },
 
   methods: {
-    onChangePage(pageOfItems) {
-      // update page of items
+    async getData() {
+      try {
+        let response = await fetch(
+          "http://universities.hipolabs.com/search?country=" + this.text
+        );
 
-      this.pageOfItems = pageOfItems;
+        this.posts = await response.json();
+      } catch (error) {
+        console.log(error);
+      }
     },
+  },
+
+  computed: {
+    rows() {
+      return this.posts.length;
+    },
+  },
+
+  created() {
+    this.getData();
   },
 };
 </script>
+
+
 
 <!-- yarn add jw-vue-pagination-->
