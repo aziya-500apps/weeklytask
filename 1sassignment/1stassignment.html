@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of Box</title>
+    <style>
+        #mytable {
+            width: 20%;
+            padding: 12px
+        }
+        #mytable,
+        td,
+        tr {
+            border: none;
+        }
+        #mytable td {
+            text-align: left;
+            padding: 12px;
+            width: 40%;
+        }
+        #search {
+            width: 17%;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h2>To Do List</h2>
+    </center>
+    <p id="id"></p>
+    <center><input type="text" name="search" id="search" onkeyup="search()" placeholder="Name .."></center>
+    <center>
+        <table border="none" id="mytable">
+            <tr>
+                <td>Black</td>
+            <td><button onclick="deleteRow(this)">delete</button></td>
+            </tr>
+            <tr>
+                <td>Brown</td>
+                <td><button onclick="deleteRow(this)">delete</button></td>
+            </tr>
+            <tr>
+                <td>Blue</td>
+                <td><button onclick="deleteRow(this)">delete</button> </td>
+            </tr>
+            <tr>
+                <td>Red</td>
+                <td> <button onclick="deleteRow(this)">delete</button></td>
+            </tr>
+            <tr>
+                <td>Orange</td>
+                <td> <button onclick="deleteRow(this)">delete</button></td>
+            </tr>
+            <tr>
+                <td>Pink</td>
+                <td><button onclick="deleteRow(this)">delete</button></td>
+            </tr>
+        </table>
+    </center>
+    <center><button onclick="clearItems()">Clear items</button></center>
+    <script>
+        // function for detele rows
+        function deleteRow(r) {
+            var n = r.parentNode.rowIndex;
+            document.getElementById("mytable").deleteRow(n);
+        }
+        //function for serching
+        function search() {
+            var searchbar, filter, table, tr, td, i, txt;
+            searchbar = document.getElementById("search");
+            filter = searchbar.value.toUpperCase();
+            table = document.getElementById("mytable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txt = td.textContent || td.innerText;
+                    if (txt.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        //function for delete entire data
+        function clearItems() {
+            var removeall = document.getElementById('mytable');
+            var removec = removeall.parentElement;
+            removec.removeChild(removeall);
+        }
+    </script>
+</body>
+</html>
