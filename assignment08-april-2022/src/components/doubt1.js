@@ -3,7 +3,7 @@
 const cheerio = require('cheerio');
 
 
-const got = (...args) => import('got').then(({default: got}) => got(...args));
+const got = (...args) => import('got').then(({ default: got }) => got(...args));
 
 // You cannot use "require" with the latest version of got
 
@@ -12,55 +12,53 @@ const got = (...args) => import('got').then(({default: got}) => got(...args));
 
 const extractLinks = async (url) => {
 
-try {
+    try {
 
-// Fetching HTML
+        // Fetching HTML
 
-const response = await got(url);
+        const response = await got(url);
 
-const html = response.body;
-
-
-// Using cheerio to extract <a> tags
-
-const $ = cheerio.load(html);
+        const html = response.body;
 
 
-const linkObjects = $('a');
+        // Using cheerio to extract <a> tags
 
-// this is a mass object, not an array
-
-
-// Collect the "href" and "title" of each link and add them to an array
-
-const links = [];
-
-linkObjects.each((index, element) => {
-
-links.push({
-
-text: $(element).text(), // get the text
-
-href: $(element).attr('href'), // get the href attribute
-
-});
-
-});
+        const $ = cheerio.load(html);
 
 
-console.log(links);
+        const linkObjects = $('a');
 
-// do something else here with these links, such as writing to a file or saving them to your database
+        // this is a mass object, not an array
 
-} catch (error) {
 
-console.log(error.response.body);
+        // Collect the "href" and "title" of each link and add them to an array
 
-}
+        const links = [];
+
+        linkObjects.each((index, element) => {
+
+            links.push({
+
+                //text: $(element).text(), // get the text
+
+                href: $(element).attr('href'), // get the href attribute
+
+            });
+
+        });
+
+
+        console.log(links);
+
+        // do something else here with these links, such as writing to a file or saving them to your database
+
+    } catch (error) {
+
+        console.log(error.response.body);
+
+    }
 
 };
-
-
 // Try it
 
 const URL = 'https://agilecrm.com/';
