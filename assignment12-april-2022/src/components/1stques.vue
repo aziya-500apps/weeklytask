@@ -13,7 +13,7 @@
                       <td>{{data1.name}}</td>
                       <td>{{data1.domains}}</td>
                       <td>{{data1.web_pages}}</td>
-                      <td>{{data1.country}}</td>
+                      <td>{{data1.country}}</td> 
            </tr></tbody>
       </table>
   </div>
