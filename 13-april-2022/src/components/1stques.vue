@@ -65,27 +65,7 @@
       </b-col>
     </b-row>
 
-   <!-- <b-container class="bv-example-row">
-     
-        <b-card-text v-for="data1 in posts" :key="data1.id">
-          
-            <b-row>
-              <b-col>University name:{{ data1.name }}</b-col>
-            </b-row><br>
-
-            <div class="w-100"></div>
-
-            <b-row>
-              <b-col>Domain:{{ data1.domains }}</b-col>
-              <b-col>Web-pages:{{ data1.web_pages }}</b-col>
-               <b-col>Country:{{ data1.country }}</b-col>
-            </b-row>
-          
-        </b-card-text>
-   
-    </b-container>  -->
-  <b-container>
-    <b-row cols="6">
+    <!-- Main table element -->
     <b-table
       :items="posts"
       :fields="fields"
@@ -96,10 +76,6 @@
       
       @filtered="onFiltered"
     >
-     </b-table>
-    </b-row>
-  </b-container>
-   
       
 
       <template #cell(actions)="row">
@@ -118,8 +94,7 @@
           </ul>
         </b-card>
       </template>
-   
-
+    </b-table>
 
     <!-- Info modal -->
     <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
