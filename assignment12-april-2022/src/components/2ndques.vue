@@ -4,7 +4,7 @@
     </b-form-input>
 
     <button @click="getData()">Submit</button>
-
+    
     <b-pagination
       v-model="currentPage"
       :total-rows="rows"
@@ -24,8 +24,6 @@
     ></b-table>
   </div>
 </template>
-
-
 <script>
 export default {
   name: "queSecond",
@@ -33,35 +31,28 @@ export default {
   data() {
     return {
       perPage: 5,
-
       currentPage: 1,
-
       posts: "",
-
       fields: ["name", "domains", "state-province", "web_pages", "country"],
     };
   },
-
   methods: {
     async getData() {
       try {
         let response = await fetch(
           "http://universities.hipolabs.com/search?country=" + this.text
         );
-
         this.posts = await response.json();
       } catch (error) {
         console.log(error);
       }
     },
   },
-
   computed: {
     rows() {
       return this.posts.length;
     },
   },
-
   created() {
     this.getData();
   },
