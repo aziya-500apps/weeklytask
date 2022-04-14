@@ -7,7 +7,7 @@
 
 <body>
     <script>
-        function removeDuplicates(num) {
+        /*function removeDuplicates(num) {
             var x,
                 len = num.length,
                 out = [],
@@ -20,11 +20,16 @@
                 out.push(x);
             }
             return out;
-        }
+        }*/
         var Mynum = [1, 2, 2, 4, 5, 4, 7, 8, 7, 3, 6];
-        result = removeDuplicates(Mynum);
+       /* result = removeDuplicates(Mynum);
         console.log(Mynum);
-        console.log(result);
+        console.log(result);*/
+        console.log(...new Set(Mynum))
+
+
+
+
     </script>
 
 </body>
