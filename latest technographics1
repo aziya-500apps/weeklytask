@@ -1,0 +1,547 @@
+Home.vue
+<template>
+  <div>
+    <Banner app_name="technographics" />
+    <b-container class="mt-3 pushninja-website prospect_home">
+      <div>
+        <b-tabs content-class="mt-3">
+          <b-tab title="Technologies" active></b-tab>
+          <b-tab title="Websites"><WebsiteSearch /></b-tab>
+          <b-tab title="Contact Lists" lazy
+            ><b-row
+              ><b-col><List @rowClicked="row_click"/></b-col>
+              <b-col><Contacts :list_data="list_data"/></b-col>
+            </b-row>
+          </b-tab>
+          <b-tab title="Apps" active></b-tab>
+        </b-tabs>
+      </div>
+    </b-container>
+  </div>
+</template>
+<script>
+  import Banner from "@/components/Banner";
+  import Contacts from "./Contacts.vue";
+  import List from "./List.vue";
+  import WebsiteSearch from "./WebsiteSearch.vue";
+  export default {
+    name: "technoGraphics",
+    components: {
+      Banner,
+      List,
+      Contacts,
+      WebsiteSearch,
+    },
+    data() {
+      return {
+        list_data: {},
+      };
+    },
+    methods: {
+      row_click(data) {
+        this.list_data = data;
+      },
+    },
+  };
+</script>
+
+===========================
+list.vue
+<template>
+  <div class="lists-table finder-list">
+    <div class="text-right add-list-button">
+      <a size="sm" variant="white" class="text-primary text-center cursor-pointer small mobile-badge-primary" @click="saveList">
+        <span class="fe fe-plus mr-1"></span>{{ $t("technographics.btn_add_list") }}
+      </a>
+    </div>
+    <b-row class="mobile-domain">
+      <b-col lg="12">
+        <CRUD
+          ref="lists_details_ref"
+          :add_url="url"
+          :edit_url="url"
+          :edit_with_api="true"
+          :delete_with_api="true"
+          form_listener="addlist"
+          url="https://api.${region}.500apps.com/v2/technographics/domain/list"
+          params="order_by=created_date desc"
+          :headers="lists_fields"
+          :results_per_page="20"
+          :search_columns="search_columns"
+          delete_url="https://api.${region}.500apps.com/v2/technographics/list"
+          @deleteRow="$emit('deleteList')"
+          class="cursor-pointer"
+          :gridview="false"
+          :count_url="count_url"
+          sidebar_id="add_list"
+          :disable_auto_refresh="false"
+          :title="title_object"
+        >
+          <template v-slot:form-side-bar="{ handle_error_success }">
+            <div>
+              <CreateList :handle_error_success="handle_error_success" />
+            </div>
+          </template>
+          <template #cell(name)="data">
+            <a class="text-primary d-block ml-2 mt-2 mt-md-0 ml-md-0" @click="row_clicked(data.item)">
+              {{ data.item.name }}
+            </a>
+          </template>
+          <template #cell(contact_count)="data">
+            <div v-b-toggle.ContactsList class="my-2 my-md-0 ml-2 ml-md-0" @click="(selected_list_data = data.item), row_clicked(data.item)">
+              {{ data.item.contact_count }}
+            </div>
+          </template>
+          <template #cell(created_date)="data">
+            <a class="text-primary my-3 my-md-0 d-block" @click="row_clicked(data.item)">
+              {{ UTCToLocal.local_from_now(data.item.created_date) }}
+            </a>
+          </template>
+          <template #empty_state>
+            <Placeholder heading="No Lists Found." description="Create email lists with all the desired emails to use it in campaigns" />
+          </template>
+        </CRUD>
+      </b-col>
+    </b-row>
+
+    <!-- <b-sidebar
+      @hidden="list_data = ''"
+      id="createListForm"
+      :title="list_popover_title"
+      ref="addListRef"
+      width="360px"
+      header-class="d-flex justify-content-between flex-row-reverse bg-white
+        border-bottom rounded-0 close-btn-right "
+      body-class="bg-soft-light rounded-0"
+      sidebar-class="border-left "
+      right
+      shadow
+    >
+      <CreateList sidebar="true" @list-added="update_list" @list-updated="update_name" :submit_type="submit_type" :list_data="list_data" />
+    </b-sidebar> -->
+  </div>
+</template>
+<script>
+  import CRUD from "../../components/CRUDPagination";
+  import lists from "@/js/technographics/lists";
+  import CreateList from "./CreateList";
+  import Placeholder from "../../components/Placeholder";
+  import UTCToLocal from "@/js/500apps/utc-to-local";
+
+  export default {
+    name: "Lists",
+    props: { delete_contact: Number },
+    components: {
+      CRUD,
+      CreateList,
+      Placeholder,
+    },
+    data() {
+      return {
+        UTCToLocal: UTCToLocal,
+        url: "https://api.${region}.500apps.com/v2/technographics/list",
+        count_url: "https://api.${region}.500apps.com/v2/technographics/domain/list?fields=count(*) as count",
+        selected_list_data: {},
+        list_popover_title: this.$t("technographics.list_popover_title"),
+        search_columns: ["name"],
+        list_data: {},
+        list_id: "",
+        submit_type: "create",
+        button_message: "",
+        listsConfig: lists,
+        lists_fields: [
+          { key: "name", label: this.$t("technographics.list_fields_name") },
+          { key: "contact_count", label: this.$t("technographics.list_fields_contact") },
+          { key: "created_date", label: this.$t("technographics.list_fields_created"), data_type: "date" },
+          { key: "actions", label: "" },
+        ],
+        title_object: { add: "Add List", edit: "Edit List" },
+      };
+    },
+    watch: {
+      delete_contact: {
+        handler: function() {
+          this.$refs["lists_details_ref"].download();
+        },
+      },
+    },
+    methods: {
+      saveList() {
+        console.log("refffff", this.$refs.lists_details_ref);
+        this.$refs.lists_details_ref.edit_row({
+          item: {},
+        });
+      },
+      // Update table data
+      download() {
+        this.$refs.lists_details_ref.download();
+      },
+      row_clicked(list_details) {
+        console.log(list_details);
+        this.$emit("rowClicked", list_details);
+      },
+      // Delete list
+      async delete_list(data) {
+        await this.$refs["lists_details_ref"].delete_row(data);
+        // For contact delete
+        this.$emit("refresh", data);
+      },
+      // Update list after add
+      async update_list(list) {
+        this.$refs["lists_details_ref"].search.results.unshift(list);
+        await this.hide_modal();
+        this.$refs.lists_details_ref.download();
+      },
+      async update_name(list) {
+        this.$refs["lists_details_ref"].search.results.filter((oldlist) => {
+          return oldlist.id === list.id;
+        })[0].name = list.name;
+        await this.hide_modal();
+      },
+      async hide_modal() {
+        this.$root.$emit("bv::toggle::collapse", "createListForm");
+      },
+    },
+  };
+</script>
+
+====================================
+contacts.vue
+<template>
+  <div class="mobile-domain email-verify">
+    <div class="bg-white border-bottom-0 card px-0 px-md-4 mb-0 rounded-bottom-0 position-relative shadow-none z-index-5">
+      <b-row>
+        <b-col cols="12" class="mt-3">
+          <h3 class="mb-1 mt-1 pl-3 pl-md-0">
+            {{ $t("technographics.contacts_title") }}
+          </h3>
+          <span class="small pl-3 pl-md-0" v-if="list_data && list_data.name">
+            {{ $t("technographics.showing_list") }} <b>{{ list_data.name }}</b>
+          </span>
+          <hr class="mb-0" />
+        </b-col>
+      </b-row>
+    </div>
+    <!--{{ list_data }}-->
+    <b-row class="mt-n2 position-relative">
+      <!-------<b-button
+        variant="white"
+        size="sm"
+        v-if="list_data && list_data.contact_count > 0 && is_export"
+        class="cursor-pointer export-button no-focus position-absolute z-index-5 mr-2"
+        @click.prevent="exportCSV($event)"
+      >
+        {{ $t("technographics.btn_export") }}</b-button
+      >--------->
+      <b-col cols="12">
+        <CRUD
+          v-if="list_data && list_data.name"
+          ref="contacts_details_ref"
+          url="https://api.${region}.500apps.com/v2/technographics/domain/contacts"
+          :headers="lists_fields"
+          :results_per_page="25"
+          :search_columns="search_columns"
+          delete_url="https://api.${region}.500apps.com/v2/technographics/contacts"
+          :count_url="'https://api.${region}.500apps.com/v2/technographics/domain/contacts?fields=count(*)? as count' + list_data.id"
+          @deleteRow="deleteRow"
+          @afterGet="enable_export"
+          :gridview="false"
+        >
+          <!-- email -->
+          <template #cell(Email)="data">
+            <div v-if="data.item.Email" class="text-truncate max-width-30ch d-flex align-items-center mobile-gravaar">
+              <Gravatar :email="data.item.Email" :size="30" />
+              <span v-b-tooltip.title="data.item.Email" class="ml-md-3 ml-2"> {{ data.item.Email }}</span>
+            </div>
+          </template>
+          <!-- domain name -->
+          <template #cell(Domain)="data">
+            <div v-if="data.item.Email">
+              {{ data.item.Email.split("@")[1] }}
+            </div>
+          </template>
+
+          <!-- How to render custom -->
+          <template #cell(actions)="data">
+            <div class="d-flex align-items-center justify-content-end mb-3 mb-md-0" v-if="data">
+              <b-link href="#" class="option-icon-delete" v-if="data.item.Email">
+                <span class="fe fe-trash-2" @click="delete_contact(data)" v-b-tooltip:hover title="Delete"></span>
+              </b-link>
+            </div>
+          </template>
+          <template #empty_state>
+            <div class="px-4 bg-white row card mx-0 pt-3">
+              <Placeholder
+                empty_state_img="img/empty-states/crm/no-contacts.svg"
+                :heading="$t('technographics.contacts_empty_state_heading')"
+                :description="$t(`${appName}.contacts_empty_state_description`)"
+              />
+            </div>
+          </template>
+        </CRUD>
+        <div v-else class="px-4 bg-white row card mx-0">
+          <Placeholder
+            class="mt-4"
+            empty_state_img="img/empty-states/crm/no-contacts.svg"
+            :heading="$t('technographics.contacts_empty_state_heading')"
+            :description="$t('technographics.contacts_helptext')"
+          />
+        </div>
+      </b-col>
+    </b-row>
+    <b-sidebar
+      id="addListForm"
+      title="Add List"
+      ref="addListRef"
+      width="360px"
+      header-class="d-flex justify-content-between flex-row-reverse bg-white
+        border-bottom rounded-0 close-btn-right "
+      body-class="bg-soft-light rounded-0"
+      sidebar-class="border-left "
+      right
+      shadow
+    >
+      <CreateList sidebar="true" @list-added="update_list" />
+    </b-sidebar>
+  </div>
+</template>
+<script>
+  import DateConverter from "@/js/500apps/utc-to-local";
+  import CRUD from "../../components/CRUDPagination";
+  import lists from "@/js/technographics/lists";
+  import CreateList from "./CreateList";
+  import Gravatar from "../../components/Gravatar";
+
+  // eslint-disable-next-line
+  import Moment from "moment";
+  //import FireDownload from "@/js/500apps/fire-download";
+  import Placeholder from "../../components/Placeholder";
+  //import bus from "@/js/500apps/emit-bus";
+
+  export default {
+    name: "Contacts",
+
+    components: { CreateList, CRUD, Placeholder, Gravatar },
+    filters: {
+      created_date(date) {
+        return Moment.utc(date)
+          .local()
+          .fromNow();
+      },
+    },
+    props: {
+      list_data: Object,
+      delete_list: Number,
+      is_export: Boolean,
+      appName: String,
+    },
+    data() {
+      return {
+        count_url: "",
+        search_columns: ["Email"],
+        listsConfig: lists,
+        lists_fields: [
+          { key: "Email", label: "Email" },
+          { key: "url", label: "Technology URL" },
+          { key: "Domain", label: "Domain" },
+          { key: "contact_created_date", label: "Created Date", data_type: "date" },
+        ],
+      };
+    },
+    // watch: {
+    //   list_data: {
+    //     handler() {
+    //       if (this.list_data && this.list_data.id && this.$refs.contacts_details_ref) {
+    //         this.$refs.contacts_details_ref.params = `where=contact_email is not null and id=${this.list_data.id}&fields=name as Name,id as list_id,contact_email as Email`;
+    //         this.$refs.contacts_details_ref.count_url = "https://api.${region}.500apps.com/v2/technographics/domain/contacts?fields=count(*) as count" + this.list_data.id;
+    //         this.$refs.contacts_details_ref.download();
+    //       }
+    //     },
+    //   },
+    // },
+    mounted() {
+      console.log("list_data", this.list_data);
+      // bus.$on("rowClicked", this.assignData);
+    },
+
+    methods: {
+      assignData(data) {
+        console.log("datasasas", data);
+      },
+      enable_export() {
+        setTimeout(() => {
+          this.is_export = true;
+        }, 500);
+      },
+      createdDate(created_date) {
+        return DateConverter.utc_to_local(created_date, "LLLL");
+      },
+      deleteRow() {
+        this.list_data.contact_count = this.$refs.contacts_details_ref.results.length - 1;
+        this.$emit("delete_contact");
+      },
+      // export contacts
+      // exportCSV() {
+      //   var results = JSON.parse(JSON.stringify(this.$refs.contacts_details_ref.results));
+      //   results.forEach((item) => {
+      //     delete item.id;
+      //     delete item.list_id;
+      //     item.Domain = item.Email.split("@")[1];
+      //   });
+      //   FireDownload.fireDownloadLink(results, "contacts.csv");
+      // },
+      // Delete list
+      delete_contact(data) {
+        this.$refs["contacts_details_ref"].delete_row(data);
+      },
+      // Update list after add
+      async update_list(list) {
+        lists.params = `where=id=${list.id}`;
+        let resp = await lists.get();
+        this.$refs["contacts_details_ref"].search.results.unshift(resp[0]);
+        this.$root.$emit("bv::toggle::collapse", "addListForm");
+      },
+    },
+  };
+</script>
+<style>
+  .z-index-5 {
+    z-index: 5;
+  }
+  .rounded-bottom-0 {
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+  .max-width-30ch {
+    max-width: 30ch;
+  }
+</style>
+=========================
+createlist.vue
+
+<template>
+  <div>
+    <b-form class="mb-3  pb-2" @submit.prevent="save">
+      <p class="text-muted">{{ $t("technographics.create_list_helptext") }}</p>
+      <b-form-group id="listname" class="pt-3 mb-3" :label="'List Name'">
+        <b-form-input id="input-listname" v-model="form.name" type="text" maxlength="50" required :placeholder="$t('technographics.list_name')" @keyup.prevent="validateOnKeyUp($event)"></b-form-input>
+        <small class="text-danger">{{ error_message }}</small>
+        <div class="text-right pt-4 border-top mt-4">
+          <b-button type="submit" variant="primary" class="btn  btn-sm px-5 py-2">{{ button_message }}</b-button>
+        </div>
+        <span v-if="message" class="small"></span>
+      </b-form-group>
+    </b-form>
+  </div>
+</template>
+
+<script>
+  import CRUDFormMixin from "@/js/500apps/mixins/form-crud-mixin.js";
+  import { bus } from "@/js/500apps/emit-bus";
+
+  export default {
+    mixins: [CRUDFormMixin],
+
+    data() {
+      return {
+        form: {
+          name: "",
+        },
+        message: "This field is required.",
+        button_message: "Create List",
+        error_message: "",
+      };
+    },
+    props: ["sidebar", "submit_type", "list_data"],
+    methods: {
+      validateOnKeyUp(event) {
+        if (event.keyCode != 13) {
+          this.show_error = false;
+          this.error_message = "";
+        }
+      },
+      async save() {
+        this.form.name = this.form.name.trim();
+        if (!this.form.name || this.form.name == "") {
+          this.show_error = true;
+          this.error_message = "This field is required.";
+          return;
+        }
+
+        this.form = { name: this.form.name };
+        bus.$emit("addlist", "submitCannedResponse");
+        this.form = {};
+      },
+      editPrefill(value) {
+        console.log("vvv", value);
+      },
+    },
+  };
+</script>
+=================
+technographics.json
+
+{
+  "banner": "This is Technographics App",
+  "list_fields_contact": "Number of Contacts",
+  "btn_add_list": "Add List",
+  "list_popover_title": "Create a new list",
+  "list_fields_created": "Created On",
+  "list_fields_name": "Name",
+  "list_name": "List Name",
+  "create_list_helptext": "Create list",
+  "tooltip_update": "Edit",
+  "adding": "Adding",
+  "global_add_message": "Emails to List",
+  "addtolist_form_label": "You can add selected Name and Email to the existing lists",
+  "list_form_select": "Please select list",
+  "create_new": "Create New",
+  "btn_saving": "Saving",
+  "btn_saved": "Saved",
+  "contacts_title": "Contacts",
+  "showing_list": "Showing for List",
+  "btn_export": "Export",
+  "contacts_empty_state_heading": "No contact found",
+  "contacts_empty_state_description": "Add emails to your lists from Domain Search, Email Verify and Email Finder",
+  "contacts_helptext": "Select any list to view contacts",
+  "tooltip_delete": "Delete",
+  "website_search": "Website Search",
+  "website_search_helptext": "Enter the technologies to generate company details.",
+  "website_name": "Enter website_name (eg: www.500apps.com)",
+  "btn_find_website_address": "Search",
+  "website_url": "TECHNOLOGY URL",
+  "website_pr_rank": "PR RANK",
+  "website_rank": "RANK",
+  "link_clear_all": "Clear All"
+}
+==================================
+list.js
+
+// eslint-disable-next-line
+const Lists_Server = "https://api.${region}.500apps.com/v2/technographics/list";
+import Data from "../500apps/data";
+
+class Lists extends Data {
+  constructor() {
+    super(Lists_Server, "", encodeURI("fields=id,name&order_by=created_date desc"));
+    this.disablePCors();
+  }
+}
+export default new Lists();
+
+===============
+contact.js
+
+// eslint-disable-next-line
+const Contacts_Server = "https://api.${region}.500apps.com/v2/technographics/contacts";
+import Data from "../500apps/data";
+
+class Contacts extends Data {
+  constructor() {
+    super(Contacts_Server);
+    this.disablePCors();
+  }
+}
+export default new Contacts();
+
+
